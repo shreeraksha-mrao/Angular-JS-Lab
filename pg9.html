@@ -1,0 +1,48 @@
+<!-- LIST OF EMPLOYEES AND SALARIES WITH FILTERS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filters</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <h1>SEARCH FOR EMPLOYEES</h1>
+        Name: <input type="text" placeholder="Enter your name" ng-model="name_search"><br>
+        Salary: <input type="text" placeholder="Enter salary" ng-model="salary_search"><br>
+        <input type="button" value="Clear"  ng-click="clear()"/>
+        <h3>List of employees and salaries</h3>
+        <table border="1px">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="emp in employees|filter:{name:name_search, salary:salary_search }">
+                    <td>{{$index+1}}</td>
+                    <td>{{emp.name}}</td>
+                    <td>{{emp.salary}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.employees=[{"name":"Amitha","salary":"200000" },
+        {"name":"Yogesh","salary":"60000"},
+        {"name":"Raksha", "salary":"60000"}]
+        $scope.clear = function(){
+            $scope.name_search="";
+            $scope.salary_search="";
+        }
+    });
+</script>
+</html>
+

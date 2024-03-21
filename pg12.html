@@ -1,0 +1,38 @@
+<!-- DATE DISPLAY -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        div{
+            font-size: 20px;
+        
+        }
+       h1{
+        text-decoration: underline;
+       }
+    </style>
+</head>
+<body ng-app="myapp">
+    <center>
+        <h1>Date Display</h1>
+        <div ng-controller="myctrl">
+            Date Today is:&nbsp; {{currentDate}} <br>
+            Short Format:&nbsp; {{currentDate | date:"short"}} <br>
+            Long Format:&nbsp; {{currentDate | date:"fullDate"}} <br>
+            Medium Format:&nbsp; {{currentDate | date:"medium"}} <br>
+            Custom Format (MM/DD/YYYY):&nbsp; {{currentDate | date:"MM/dd/yyyy"}} <br>
+        </div>
+    </center>
+    
+</body>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.currentDate = new Date();
+    });
+</script>
+</html>

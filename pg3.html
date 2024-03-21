@@ -1,0 +1,39 @@
+<!-- Simple calculator -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <h1>SIMPLE CALCULATOR</h1>
+        Operand1: <input type="text" ng-model="op1"><br>
+        Operator:
+        <select ng-model="selecteditem">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select><br>
+        Operand2: <input type="text" ng-model="op2"><br>
+        <button ng-click="calculate()">Calculate</button><br>
+        Result: {{result}}
+    </div>
+</body>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+       $scope.calculate = function(){
+        if($scope.op1 && $scope.selecteditem && $scope.op2){
+            $scope.result = $scope.$eval($scope.op1+$scope.selecteditem+$scope.op2);
+        }
+        else{
+            alert("Fill all columns")
+        }
+       }
+    });
+</script>
+</html>

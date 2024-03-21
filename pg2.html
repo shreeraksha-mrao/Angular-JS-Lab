@@ -1,0 +1,58 @@
+<!-- Shopping list -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <h1>Shopping List</h1>
+        Enter the item to be added: <input type="text" ng-model="item" id="one">
+        <button ng-click="add(item)">Add</button>
+
+        <ul ng-repeat="item in slist">
+            <li>{{item}}</li>
+        </ul>
+
+        <select ng-model="selecteditem" ng-options="i for i in slist"></select>
+        <button ng-click="remove(selecteditem)">Remove</button>
+    </div>
+</body>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.slist=["Banana","Apple","Pencil"];
+
+        $scope.add = function(item){
+            if($scope.slist.indexOf(item)===-1 && $scope.item){
+                $scope.slist.push(item);
+                $scope.item="";
+            }
+            else if(!$scope.item){
+                alert("Please enter an item to be added");
+                document.getElementById("one").focus();
+            }
+            else
+            {
+                alert("item already exists");
+            }
+        }
+
+        $scope.remove = function(selecteditem){
+            if($scope.selecteditem){
+                var d = confirm("Are you sure you want to delete this item ?")
+                if(d==true){
+                    let index = $scope.slist.indexOf(selecteditem);
+                    $scope.slist.splice(index,1);
+             }
+            }
+            else{
+                alert("Please select an item to be deleted")
+            }
+        }
+    });
+</script>
+</html>

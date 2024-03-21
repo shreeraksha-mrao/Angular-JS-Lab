@@ -1,0 +1,39 @@
+<!-- Square and Factorial of a number -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square and factoria</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+   <div ng-controller="myctrl">
+    <h1>SQUARE AND FACTORIAL OF A NUMBER</h1>
+    Enter the number: <input type="text" ng-model="item">
+    <button ng-click="compute()">Compute</button><br><br>
+    The square is: {{square}} <br>
+    The factorial is: {{fact}}
+   </div> 
+</body>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.compute = function(){
+            $scope.square = $scope.$eval($scope.item+"*"+$scope.item)
+    
+            $scope.fact = 1
+            let temp = Number.parseInt($scope.item)
+            if(temp<0 || $scope.item.includes("."))
+            {
+                $scope.fact = "Undefined"
+            }
+            else{
+                for(let i=1;i<=temp;i++){
+                    $scope.fact = $scope.fact*i;
+                }
+            }
+        }
+    });
+</script>
+</html>

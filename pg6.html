@@ -1,0 +1,61 @@
+<!--To do list application  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <h1>To Do List Application</h1>
+        Enter a task: <input type="text" ng-model="task" id="tsk">
+        <button ng-click="add(task)">Add Task</button><br>
+        <ul>
+            <li ng-repeat="task in tasks">
+                <span ng-show="!task.Editing">{{task.Title}}</span>
+                <input ng-show="task.Editing" ng-model="task.Title" ng-blur="turnoff(task)">
+                <button ng-click="edit(task)">Edit</button>
+                <button ng-click="delete(task)">Delete</button>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.tasks=[{"Title":"Got to Gym","Editing":false},
+                    {"Title":"Bathe", "Editing":false}];
+        
+        $scope.add = function(task){
+            if($scope.task){
+                var t={"Title":task,"Editing":false};
+                $scope.tasks.push(t)
+            }
+            else{
+                alert("Make sure to fill the task column");
+                document.getElementById("tsk").focus();
+            }
+        }
+
+        $scope.edit = function(task){
+            task.Editing=true;
+        }
+
+        $scope.turnoff = function(task){
+            task.Editing=false;
+        }
+
+        $scope.delete  = function(task){
+            var d = confirm("Are you sure you want to delete ?");
+            if(d==true)
+            {
+                let indx = $scope.tasks.indexOf(task)
+                $scope.tasks.splice(indx,1);
+            }
+        }
+    });
+</script>
+</html>
