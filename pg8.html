@@ -1,54 +1,53 @@
-<!-- Login form validation with username and password feilds -->
-
+<!-- Login form validation -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>form validation</title>
+    <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-
 <body ng-app="myapp">
     <div ng-controller="myctrl">
-        <h1>LOGIN FORM VALIDATION</h1>
         <form name="lof">
-            Username: <input type="text" ng-model="name" name="name" ng-minlength="5" ng-maxlength="10" required placeholder="Enter your name">
-            <span ng-show="lof.name.$error.required && lof.name.$dirty">Username needs to be entered</span><br>
-            <span ng-show="lof.name.$error.minlength">The minimimum length of username is 5</span><br>
-            <span ng-show="lof.name.$error.maxlength">The maximum length of username is 10</span><br>
+            Enter the username: <input type="text" name="name" ng-model="name" ng-minlength="5" ng-maxlength="8" required placeholder="Enter name"><br>
+            <span ng-show="lof.name.$error.required && lof.name.$dirty">Please enter the name</span> <br>
+            <span ng-show="lof.name.$error.minlength">The minimum length should be 5</span><br>
+            <span ng-show="lof.name.$error.maxlength">The maximum length should be 8</span><br>
 
-            Password: <input type="password" ng-model="pass" name="pass" ng-minlength="5" ng-maxlength="10" required placeholder="Enter password">
-            <span ng-show="lof.pass.$error.required && lof.pass.$dirty">Password is compulsory</span><br>
-            <span ng-show="lof.pass.$error.minlength">The minimimum length of Password is 5</span><br>
-            <span ng-show="lof.pass.$error.maxlength">The maximum length of Password is 10</span><br>
-
-            <button ng-click="validate()" ng-disabled="lof.$invalid" id="loginbutton">Login</button>
+            Enter the Password: <input type="password" name="pass" ng-model="pass" ng-minlength="5" ng-maxlength="8" required placeholder="Enter name"><br>
+            <span ng-show="lof.pass.$error.required && lof.pass.$dirty">Please enter the Password</span> <br>
+            <span ng-show="lof.pass.$error.minlength">The minimum length should be 5</span><br>
+            <span ng-show="lof.pass.$error.maxlength">The maximum length should be 8</span><br>
+            
+            <button ng-click="validate()" id="button">Login</button>
         </form>
+        
     </div>
-</body>
-<script>
-    var app = angular.module("myapp",[]);
-    app.controller("myctrl",function($scope){
-        $scope.name='';
-        $scope.pass='';
-        $scope.attempts=0;
+    <script>
+        var app = angular.module("myapp",[]);
+        app.controller("myctrl",function($scope){
+            $scope.attempts=0;
 
-        $scope.validate=function(){
-            if ($scope.name.toLowerCase()=="raksha" && $scope.pass =="123123"){
-                alert("Login succesful");
-            }
-            else{
-                $scope.attempts++
-                if($scope.attempts<=3){
-                    alert("Try again, you have already attempted: "+$scope.attempts)
+            $scope.validate = function()
+            {
+                if($scope.name.toLowerCase()=="raksha" && $scope.pass=="123123"){
+                    alert("login successful")
                 }
                 else{
-                    document.getElementById("loginbutton").disabled = true;
+                    $scope.attempts = $scope.attempts+1;
+                    if($scope.attempts<=3)
+                    {
+                        alert("Try again, you have already tried : "+$scope.attempts)
+                    }
+                    else
+                    {
+                        alert("Exceeded maximum number of tries");
+                        document.getElementById("button").disabled = true;
+                    }
                 }
             }
-        }
-
-    });
-</script>
+        });
+    </script>
+</body>
 </html>
