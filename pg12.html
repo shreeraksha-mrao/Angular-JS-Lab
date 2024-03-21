@@ -20,7 +20,7 @@
     <center>
         <h1>Date Display</h1>
         <div ng-controller="myctrl">
-            Date Today is:&nbsp; {{currentDate}} <br>
+            Date Today is:&nbsp; {{currentDate|date:""}} <br>
             Short Format:&nbsp; {{currentDate | date:"short"}} <br>
             Long Format:&nbsp; {{currentDate | date:"fullDate"}} <br>
             Medium Format:&nbsp; {{currentDate | date:"medium"}} <br>

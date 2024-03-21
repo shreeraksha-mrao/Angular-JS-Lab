@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <form name="v">
+            First name: <input type="text" ng-model="fname" id="fname" placeholder="Enter first name" required name="fname"><br><br>
+            <span ng-show="v.fname.$error.required && v.fname.$dirty">First name is compulsory</span>
+        </form>
+        
+        Last name: <input type="text" ng-model="lname" id="lname" placeholder="Enter last name"><br><br>
+        Date of birth: <input type="date" ng-model="dob" id="dob" placeholder="Enter Date of birth"><br><br>
+        FULL NAME: {{fname+" "+lname}} <br>
+        AGE:{{calcage()}} <br>
+    </div>
+</body>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.fname = "Raksha";
+        $scope.lname = "Rao";
+        $scope.dob = "";
+        $scope.calcage = function()
+        {
+            let currentdate = new Date();
+            let dob = new Date($scope.dob);
+            let age;
+            if($scope.dob){
+                age = currentdate.getFullYear() - dob.getFullYear();
+                if(currentdate.getMonth()<dob.getMonth() || (currentdate.getMonth()===dob.getMonth() && currentdate.getDate()<dob.getDate())){
+                    age--;
+                }
+            }
+            else{
+                age=""
+            }
+            return age;
+        
+        }
+    });
+</script>
+</html>

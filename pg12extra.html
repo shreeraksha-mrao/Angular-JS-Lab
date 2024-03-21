@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <h1>Different Date Formats</h1>
+        Date formats: <br>
+        <select ng-model="selecteditem">
+            <option value="currentdate">Current Date</option>
+            <option value="fulldate">Full Date</option>
+            <option value="mediumdate">Medium Date</option>
+            <option value="shortdate">Short Date</option>
+            <option value="custom">Custom Date</option>
+        </select><br>
+
+        <span ng-show="currentdate">Date Today is:&nbsp; {{currentdate1 |date:""}} </span><br>
+        <span ng-show="short">Short Format:&nbsp; {{currentdate1 | date:"short"}} </span><br>
+        <span ng-show="full">Long Format:&nbsp; {{currentdate1 | date:"fullDate"}} </span><br>
+        <span ng-show="medium">Medium Format:&nbsp; {{currentdate1 | date:"medium"}} </span><br>
+        <span ng-show="custom">Custom Format (MM/DD/YYYY):&nbsp; {{currentdate1 | date:"MM/dd/yyyy"}} </span><br>
+
+        <button ng-click="display()">Display</button><br>
+
+        
+    </div>
+</body>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("myctrl",function($scope){
+        $scope.currentdate1 = new Date();
+
+        $scope.currentdate = true;
+        $scope.short = false;
+        $scope.full = false;
+        $scope.medium = false;
+        $scope.custom = false;
+
+        $scope.display = function()
+        {
+            if($scope.selecteditem=="currentdate")
+            {
+                $scope.currentdate = true;
+                $scope.short = false;
+                $scope.full = false;
+                $scope.medium = false;
+                $scope.custom = false;
+            }
+            else if($scope.selecteditem=="fulldate"){
+                $scope.currentdate = false;
+                $scope.short = false;
+                $scope.full = true;
+                $scope.medium = false;
+                $scope.custom = false;
+            }
+            else if($scope.selecteditem=="mediumdate"){
+                $scope.currentdate = false;
+                $scope.short = false;
+                $scope.full = false;
+                $scope.medium = true;
+                $scope.custom = false;
+            }
+            else if($scope.selecteditem=="shortdate"){
+                $scope.currentdate = false;
+                $scope.short = true;
+                $scope.full = false;
+                $scope.medium = false;
+                $scope.custom = false;
+            }
+            else if($scope.selecteditem=="custom"){
+                $scope.currentdate = false;
+                $scope.short = false;
+                $scope.full = false;
+                $scope.medium = false;
+                $scope.custom = true;
+            }
+        }
+    });
+
+</script>
+</html>

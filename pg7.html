@@ -44,6 +44,12 @@
                 document.getElementById("email").focus();
                 return false;
             }
+            else if(!$scope.email.includes('.'))
+            {
+                alert("Kindly enter valid email");
+                document.getElementById("email").focus();
+                return false;
+            }
             else{
                 var userdata={"name":$scope.name,"email":$scope.email,"editing":false}
                 if(userdata.name==""){
@@ -78,6 +84,12 @@
             else if(user.email=="")
             {
                 alert("Kindly enter a email")
+                document.getElementById("email").focus();
+                return false;
+            }
+            else if(!user.email.includes('.'))
+            {
+                alert("Kindly enter valid email");
                 document.getElementById("email").focus();
                 return false;
             }
