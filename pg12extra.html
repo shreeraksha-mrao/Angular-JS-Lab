@@ -18,13 +18,15 @@
             <option value="custom">Custom Date</option>
         </select><br>
 
+        <button ng-click="display()">Display</button><br>
+
         <span ng-show="currentdate">Date Today is:&nbsp; {{currentdate1 |date:""}} </span><br>
         <span ng-show="short">Short Format:&nbsp; {{currentdate1 | date:"short"}} </span><br>
         <span ng-show="full">Long Format:&nbsp; {{currentdate1 | date:"fullDate"}} </span><br>
         <span ng-show="medium">Medium Format:&nbsp; {{currentdate1 | date:"medium"}} </span><br>
         <span ng-show="custom">Custom Format (MM/DD/YYYY):&nbsp; {{currentdate1 | date:"MM/dd/yyyy"}} </span><br>
 
-        <button ng-click="display()">Display</button><br>
+      
 
         
     </div>
@@ -33,13 +35,6 @@
     var app = angular.module("myapp",[]);
     app.controller("myctrl",function($scope){
         $scope.currentdate1 = new Date();
-
-        $scope.currentdate = true;
-        $scope.short = false;
-        $scope.full = false;
-        $scope.medium = false;
-        $scope.custom = false;
-
         $scope.display = function()
         {
             if($scope.selecteditem=="currentdate")

@@ -1,113 +1,115 @@
-<!-- CRUD APP -->
+<!-- CRUD APPLICATION TO MANAGE USERS -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD App</title>
+    <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body ng-app="myapp">
     <div ng-controller="myctrl">
-        <h1>CRUD APPLICATION</h1>
-        name: <input type="text" ng-model="name" id="name">
-        email: <input type="email" ng-model="email" id="email">
-        <input type="button" value="create" ng-click="createuser()">
+        <h1>Crud app</h1>
+        Enter name: <input type="text" ng-model="name" id="name">
+        Enter email: <input type="email" ng-model="email" id="email">
+        <button ng-click="create()">Create</button>
 
         <ul>
-            <li ng-repeat="user in users">
-                <span ng-show="!user.editing">{{user.name}}</span>
-                <input ng-show="user.editing" type="text" ng-model="user.name">
-                <span ng-show="!user.editing">{{user.email}}</span>
-                <input ng-show="user.editing" type="text" ng-model="user.email">
-                <input type="button" value="read" ng-click="read(user)">
-                <input type="button" value="update" ng-click="update(user)">
-                <input type="button" value="delete" ng-click="delete(user)">
+            <li  ng-repeat="user in users">
+            <span ng-show="!user.editing">{{user.name}}</span>
+            <input type="text" ng-show="user.editing" ng-model="user.name" id="name1">
+            <span ng-show="!user.editing">{{user.email}}</span>
+            <input type="text" ng-show="user.editing" ng-model="user.email" id="email1">
+            <button ng-click="read(user)">read</button>
+            <button ng-click="update(user)">update</button>
+            <button ng-click="delete(user)">delete</button>
             </li>
+           
         </ul>
     </div>
-    
 </body>
 <script>
     var app = angular.module("myapp",[]);
     app.controller("myctrl",function($scope){
         $scope.users=[];
 
-        $scope.createuser = function(){
-            if($scope.name==null){
+        $scope.create = function()
+        {
+            if(!$scope.name)
+            {
                 alert("Kindly enter a name")
                 document.getElementById("name").focus();
                 return false;
             }
-            else if($scope.email==null){
+            else if(!$scope.email)
+            {
                 alert("Kindly enter a email")
                 document.getElementById("email").focus();
                 return false;
             }
-            else if(!$scope.email.includes('.'))
+            else if(!$scope.email.includes("."))
             {
                 alert("Kindly enter valid email");
                 document.getElementById("email").focus();
                 return false;
             }
-            else{
-                var userdata={"name":$scope.name,"email":$scope.email,"editing":false}
-                if(userdata.name==""){
+            else
+            {
+                var t = {"name":$scope.name,"email":$scope.email, "editing":false}
+                if(!t.name)
+                {
                     alert("Kindly enter a name")
                     document.getElementById("name").focus();
                     return false;
                 }
-                else if(userdata.email==""){
+                else if(!t.email)
+                {
                     alert("Kindly enter a email")
                     document.getElementById("email").focus();
                     return false;
                 }
                 else{
-                    $scope.users.push(userdata);
+                    $scope.users.push(t);
                     $scope.name="";
                     $scope.email=""
                 }
             }
         }
-
         $scope.read = function(user){
-            user.editing=true
+            user.editing = true;
         }
         $scope.update = function(user)
         {
-            if( user.name=="")
+            if(!user.name)
             {
                 alert("Kindly enter a name")
-                document.getElementById("name").focus();
+                document.getElementById("name1").focus();
                 return false;
             }
-            else if(user.email=="")
+            else if(!user.email)
             {
                 alert("Kindly enter a email")
-                document.getElementById("email").focus();
+                document.getElementById("email1").focus();
                 return false;
             }
-            else if(!user.email.includes('.'))
+            else if(!user.email.includes(".") || !user.email.includes("@"))
             {
                 alert("Kindly enter valid email");
-                document.getElementById("email").focus();
+                document.getElementById("email1").focus();
                 return false;
             }
             else{
-                user.editing=false;
+                user.editing = false;
             }
         }
-        $scope.delete = function(user){
+        $scope.delete = function(user)
+        {
             var dc = confirm("y/n");
             if(dc==true){
                 var idx = $scope.users.indexOf(user);
                 $scope.users.splice(idx,1)
             }
-
-            else
-            {
-                alert("You chose to keep it")
-            }
         }
     });
 </script>
+</html>

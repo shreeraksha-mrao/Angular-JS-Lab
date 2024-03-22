@@ -9,7 +9,7 @@
 </head>
 <body ng-app="myapp">
     <div ng-controller="myctrl">
-        Enter number of students: <input type="text" ng-model="num">
+        Enter number of students: <input type="text" ng-model="num" id="num">
         <button ng-click="generate(num)">Generate</button>
         <table border="1px solid black">
             <thead>
@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="student in students">
-                    <td>{{student.id}}</td>
+                    <td>{{$index+1}}</td>
                     <td>{{student.name}}</td>
                     <td>{{student.cgpa}}</td>
                 </tr>
@@ -35,12 +35,16 @@
 
         $scope.generate = function(num)
         {
-            $scope.students=[];
-            let temp = Number.parseInt(num);
-            for(let i=0;i<temp;i++){
-                $scope.rand = Math.random()
-                var t = {"id":i+1,"name":"student-"+(i+1),"cgpa":$scope.rand*10}
-                $scope.students.push(t);
+            if($scope.num){$scope.students=[];
+                let temp = Number.parseInt(num);
+                for(let i=0;i<temp;i++){
+                    $scope.rand = Math.random()
+                    var t = {"name":"student-"+(i+1),"cgpa":$scope.rand*10}
+                    $scope.students.push(t);}
+            }
+            else{
+                alert("Enter the number of records")
+                document.getElementById("num").focus();
             }
         }
     });

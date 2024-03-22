@@ -17,7 +17,7 @@
             <li>{{item}}</li>
         </ul>
 
-        <select ng-model="selecteditem" ng-options="i for i in slist"></select>
+        <select ng-model="selecteditem" ng-options="i for i in slist" id="select"></select>
         <button ng-click="remove(selecteditem)">Remove</button>
     </div>
 </body>
@@ -51,6 +51,7 @@
             }
             else{
                 alert("Please select an item to be deleted")
+                document.getElementById("select").focus();
             }
         }
     });
